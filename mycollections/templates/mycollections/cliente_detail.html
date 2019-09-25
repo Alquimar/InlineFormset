@@ -1,0 +1,30 @@
+{% extends "mycollections/base.html" %}
+{% block content %}
+<div class="card">
+        <div class="card-header">
+            <h1><b>Cliente ID {{ object }}</b></h1>
+        </div>
+        <div class="card-body">
+        <table class="table">
+        <!--for inline added titles-->
+        {% if object.contatos %}
+        {% for contato in object.contatos.all %}
+        <tr>
+            <th>Contato @{{contato.telefone}}</th>
+            <td>{{contato.whatsapp}}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+        <!--end-->
+    	{% if object.nome %}
+    	<tr>
+            <th>Nome</th>
+            <td>{{ object.nome }}</td>
+        </tr>
+    	{% endif %}
+        </table>
+        <a class="btn btn-outline-info" href="{% url 'mycollections:cliente_update' aplicacao_proprietario_slug aplicacao_slug propriedade_slug object.id %}">Update</a>
+        <a class="btn btn-outline-danger" href="{% url 'mycollections:cliente_delete' aplicacao_proprietario_slug aplicacao_slug propriedade_slug object.id %}">Delete</a>
+        </div>
+</div>
+{% endblock content %}
